@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import useWordGame from './useWordGame';
 import './App.css';
 
 function App() {
+
+  // custom hook
+  const { inputRef, text, handleChange, isTimeRunning, timeRemaining, startGame, wordCount } = useWordGame(10)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>How fast do you type?</h1>
+      <textarea ref={inputRef} value={text} onChange={handleChange} disabled={!isTimeRunning} />
+      <h4>Time reminaing: {timeRemaining}</h4>
+      <button onClick={startGame} disabled={isTimeRunning} >Start</button>
+      <h1>Word count: {wordCount}</h1>
     </div>
   );
 }
